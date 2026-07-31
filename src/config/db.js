@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const {mongoUrl}= require("./env");
 
 const MongoConnect= async ()=>{
     try {
-        mongoose.connect("mongodb://127.0.0.1:27017")
+        await mongoose.connect(mongoUrl)
         .then(()=> console.log("MongoDB is connected"))
         .catch((err)=>console.error('Error',err));
     } catch (error) {

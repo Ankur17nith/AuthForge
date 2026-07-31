@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const {setUser}= require('../utils/generateToken')
+const {setToken}= require('../utils/generateToken')
 
 async function handleUserRegister(req, res, next){
     try {
@@ -20,7 +20,7 @@ async function handleUserRegister(req, res, next){
 
         const user= await User.create({name,email,password});
 
-        const token= setUser(user);
+        const token= setToken(user);
 
         res.cookie('token',token,{
             httpOnly:true,
@@ -69,7 +69,7 @@ async function handleUserLogin(req, res, next){
             })
         }
 
-        const token= setUser(user);
+        const token= setToken(user);
 
         res.cookie('token',token,{
             httpOnly:true,
@@ -107,5 +107,6 @@ async function handleUserLogout(req, res){
 
 module.exports ={
     handleUserRegister,
-    handleUserLogin
+    handleUserLogin,
+    handleUserLogout
 }
